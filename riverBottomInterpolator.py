@@ -109,6 +109,12 @@ def main():
         parameters["dx"]
     )
 
+    save_river_outline(
+        cross_sections,
+        parameters["river_outline_file_name"],
+        cross_sections_crs
+    )
+
     pointXYs, points_crs = load_points(
         parameters["points_file_name"],
         parameters["points_z_field_name"]
@@ -117,19 +123,18 @@ def main():
     if cross_sections_crs != points_crs:
         raise Exception("CRS doesn't match")
 
-    save_river_outline(
-        cross_sections,
-        parameters["river_outline_file_name"],
-        cross_sections_crs
-    )
-
     points = align_points_to_grid(grid, pointXYs)
 
-    res_points = interpolateIDW(
-        grid,
-        points,
-        anisotropy=parameters["anisotropy"]
-    )
+    if parameters["interpolation_method"] == "IDW":
+        res_points = interpolateIDW(
+            grid,
+            points,
+            anisotropy=parameters["anisotropy"],
+            num_neighbours=parameters["IDW_num_neighbours"],
+            power=parameters["IDW_power"]
+        )
+    else:
+        raise Exception("Interpolation method not supported")
 
     save_res_points(
         res_points,

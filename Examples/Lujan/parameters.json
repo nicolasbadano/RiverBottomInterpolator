@@ -3,11 +3,11 @@
     "cross_section_order_field_name": "s",
     "points_file_name": "elevation_points.geojson",
     "points_z_field_name": "z",
-    "anisotropy": 20.0,
+    "anisotropy": 10.0,
     "interpolation_method": "IDW",
-    "IDW_num_neighbours": 12,
+    "IDW_num_neighbours": 6,
     "IDW_power": 1,
-    "dx": 5.0,
+    "dx": 1.0,
     "river_outline_file_name": "river_outline.geojson",
     "results_file_name": "interpolated_points.geojson"
 }
