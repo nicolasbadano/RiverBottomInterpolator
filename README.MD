@@ -1,4 +1,4 @@
-# riverBottomInterpolator
+# RiverBottomInterpolator
 
 This code allows interpolating partial river bathymetry points to the entire domain, taking into account the anisotropy of longitudinal and lateral bottom vaiations.
 
@@ -42,6 +42,15 @@ All the parameters for the interpolation are read from the `parameters.json` fil
 
     # [Input] Rate of lateral variability to longitudinal variability
     "anisotropy": 20.0,
+    
+    # [Input] Interpolation method
+    "interpolation_method": "IDW",
+   
+    # [Input] Number of neighbours for the IDW method
+    "IDW_num_neighbours": 12,
+   
+     # [Input] Power of distance for the IDW method
+    "IDW_power": 1,
 
     # [Input] Desired average output resolution, in meters
     "dx": 5.0,
@@ -55,6 +64,23 @@ All the parameters for the interpolation are read from the `parameters.json` fil
 ```
 
 All the input geojson files need to have **the same projected coordinate system**.
+
+## How it works
+
+The algorithm works a following:
+
+- It reads a number of cross section segments that define the extent, and orientation of the river reach.
+
+- It then creates a conformal grid of points following that outlines, with the desired resolution
+
+- The conformal grid acts as a map between a cartesian rectangular space and the geometry in geographical coordinates.
+
+- The surveyed points are transformed into the cartesian rectangular space.
+
+- Interpolation is calculated on the cartesian rectangular space. Currently only Inverse Distance Weighted interpolation is supported, but it's easy to adapt any other interpolation technique, such a Krigging.
+
+- Points on the cartesian space are exported with their original geographical coordinates
+
 
 ## Requirements
 
