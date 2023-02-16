@@ -1,0 +1,4 @@
+cross_sections
+Examples/*/river_outline.geojson
+Examples/*/interpolated_points.geojson
+__pycache__

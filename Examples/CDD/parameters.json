@@ -1,0 +1,10 @@
+{
+    "cross_section_file_name": "cross_sections.geojson",
+    "cross_section_order_field_name": "s",
+    "points_file_name": "depth_points.geojson",
+    "points_z_field_name": "z",
+    "anisotropy": 20.0,
+    "dx": 5.0,
+    "river_outline_file_name": "river_outline.geojson",
+    "results_file_name": "interpolated_points.geojson"
+}
